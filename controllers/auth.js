@@ -1,5 +1,13 @@
+const { User } = require('./models');
+
 const signUp = (req, res) => {
-  // create a new user and return a valid JWT token to the client
+  User.findOne({ email: req.body.email }, (err, user) => {
+    if (err) return res.send(err);
+    user.checkPassword(req.body.password,(err, isMatch) => {
+      if (err) return res.send(err);
+      res.send(isMAtch);
+    });
+  });
 };
 
 const signIn = (req, res) => {
